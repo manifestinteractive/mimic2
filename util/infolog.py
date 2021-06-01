@@ -18,14 +18,16 @@ def init(filename, run_name, slack_url=None):
   _file.write('\n-----------------------------------------------------------------\n')
   _file.write('Starting new training run\n')
   _file.write('-----------------------------------------------------------------\n')
+  _file.flush()
   _run_name = run_name
   _slack_url = slack_url
 
 
 def log(msg, slack=False):
-  print(msg)
+  print(msg, flush=True)
   if _file is not None:
     _file.write('[%s]  %s\n' % (datetime.now().strftime(_format)[:-3], msg))
+    _file.flush()
   if slack and _slack_url is not None:
     Thread(target=_send_slack, args=(msg,)).start()
 

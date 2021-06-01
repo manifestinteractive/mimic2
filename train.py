@@ -9,7 +9,7 @@ import tensorflow as tf
 import traceback
 
 from datasets.datafeeder import DataFeeder
-from hparams import hparams, hparams_debug_string
+from hparams import hparams
 from models import create_model
 from text import sequence_to_text
 from util import audio, infolog, plot, ValueWindow
@@ -44,13 +44,12 @@ def time_string():
 
 
 def train(log_dir, args):
-  commit = get_git_commit() if args.git else 'None'
+  commit = get_git_commit() if args.git else 'mimic-my-voice'
   checkpoint_path = os.path.join(log_dir, 'model.ckpt')
   input_path = os.path.join(args.base_dir, args.input)
   log('Checkpoint path: %s' % checkpoint_path)
   log('Loading training data from: %s' % input_path)
   log('Using model: %s' % args.model)
-  log(hparams_debug_string())
 
   # Set up DataFeeder:
   coord = tf.train.Coordinator()
@@ -83,9 +82,9 @@ def train(log_dir, args):
         # Restore from a checkpoint if the user requested it.
         restore_path = '%s-%d' % (checkpoint_path, args.restore_step)
         saver.restore(sess, restore_path)
-        log('Resuming from checkpoint: %s at commit: %s' % (restore_path, commit), slack=True)
+        log('Resuming from checkpoint: %s: %s' % (restore_path, commit), slack=True)
       else:
-        log('Starting new training run at commit: %s' % commit, slack=True)
+        log('Starting new training run: %s' % commit, slack=True)
 
       feeder.start_in_session(sess)
 

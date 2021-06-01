@@ -4,7 +4,7 @@ from multiprocessing import cpu_count
 from tqdm import tqdm
 from datasets import amy, blizzard, ljspeech, kusal, mailabs
 from datasets import mrs
-from hparams import hparams, hparams_debug_string
+from hparams import hparams
 import sys
 
 
@@ -108,8 +108,6 @@ def main():
   if args.dataset == 'mailabs' and args.mailabs_books_dir is None:
     parser.error(
         "--mailabs_books_dir required if mailabs is chosen for dataset.")
-
-  print(hparams_debug_string())
 
   if args.dataset == 'amy':
     preprocess_amy(args)
