@@ -14,4 +14,4 @@ What's Different
 - [X] Updated Docker Build Instructions
 - [X] Removed Sample Content and Unused Documentation
 
-So, you probably do not want THIS version of the Mimic Recording Studio, unless you are a developer working with the [Mimic My Voice](https://github.com/manifestinteractive/mimic-my-voice) project.
+So, you probably do not want THIS version of the Mimic II Trainer, unless you are a developer working with the [Mimic My Voice](https://github.com/manifestinteractive/mimic-my-voice) project.
